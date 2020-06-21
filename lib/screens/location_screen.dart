@@ -26,19 +26,21 @@ class _LocationScreenState extends State<LocationScreen> {
     updateUI(widget.initialWeather);
   }
 
-  void updateUI(WeatherModel weather) {
+  void updateUI(WeatherModel _weather) {
     setState(() {
       if (weather == null) {
+        weather = null;
         temperature = 0;
         weatherIcon = 'Error';
         weatherMessage = 'Unable to get weather data';
         cityName = '';
         return;
       }
-      temperature = weather.temp;
-      weatherIcon = weather.getWeatherIcon();
-      weatherMessage = weather.getTempMessage();
-      cityName = weather.city;
+      weather = _weather;
+      temperature = _weather.temp;
+      weatherIcon = _weather.getWeatherIcon();
+      weatherMessage = _weather.getTempMessage();
+      cityName = _weather.city;
     });
   }
 
