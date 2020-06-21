@@ -1,4 +1,5 @@
-import 'package:clima/services/weather.dart';
+import 'package:clima/models/weather.dart';
+import 'package:clima/services/location_weather.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -16,17 +17,17 @@ class _LoadingScreenState extends State<LoadingScreen> {
     getGeoDate();
   }
 
-  void getGeoDate() async {
-    Position position = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
+  @override
+  void deactivate() {
+    super.deactivate();
+  }
 
-    final latitude = position.latitude;
-    final longitude = position.longitude;
-    print(latitude);
-    print(longitude);
+  void getGeoDate() async {
+    final service = LocationWeatherService();
+    var weather = await service.getLocationWeather();
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return LocationScreen(
-        location: position,
+        weather: weather,
       );
     }));
   }

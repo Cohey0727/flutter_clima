@@ -1,11 +1,12 @@
+import 'package:clima/models/weather.dart';
 import 'package:flutter/material.dart';
-import 'package:clima/utilities/constants.dart';
+import 'package:clima/styles//constants.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LocationScreen extends StatefulWidget {
-  final Position location;
+  final WeatherModel weather;
 
-  LocationScreen({this.location});
+  LocationScreen({this.weather});
 
   @override
   _LocationScreenState createState() => _LocationScreenState();
