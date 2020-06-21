@@ -1,6 +1,7 @@
 import 'package:clima/models/weather.dart';
 import 'package:clima/services/location_weather.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:geolocator/geolocator.dart';
 
 import 'location_screen.dart';
@@ -24,10 +25,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   void getGeoDate() async {
     final service = LocationWeatherService();
-    var weather = await service.getLocationWeather();
+    var weather = await service.getCurrentLocationWeather();
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return LocationScreen(
-        weather: weather,
+        initialWeather: weather,
       );
     }));
   }
@@ -36,9 +37,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: RaisedButton(
-          onPressed: getGeoDate,
-          child: Text('Get Location'),
+        child: SpinKitDoubleBounce(
+          color: Colors.white,
+          size: 100.0,
         ),
       ),
     );
